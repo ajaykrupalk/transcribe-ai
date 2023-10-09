@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function Upload({ onInputValue }) {
+function Upload({ onInputValue, clearAudio }) {
     const [selectedFile, setSelectedFile] = useState('')
     const [dragging, setDragging] = useState(false)
     const [error, setError] = useState('')
+
+    useEffect(() => {
+        if(clearAudio){
+            setSelectedFile('')
+        }
+    },[clearAudio])
 
     const handleDragEnter = (e) => {
         e.preventDefault();
@@ -50,32 +56,33 @@ function Upload({ onInputValue }) {
     };
 
     return (
-        <div className={`m-2 flex flex-col items-center justify-center flex-nowrap h-44 w-96 border-2 border-slate-200 p-2 hover:border-blue-300
-                            ${dragging ? 'bg-blue-50 border-blue-400 border-solid rounded-md disabled' : 'border-dashed rounded-sm'}`}
-            onDragEnter={handleDragEnter}
-            onDragLeave={handleDragLeave}
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={handleDrop}
-        >
-            <img src={require("../assets/uploadFile.png")} className="w-6 h-6 mb-2"></img>
-            <label className="text-sm font-medium text-gray-500">
-                Drag and Drop or
-                <span>
-                    <input
-                        type="file"
-                        className="hidden"
-                        id="fileInput"
-                        accept="audio/*"
-                        onChange={handleFileChange}
-                    />
-                    <label htmlFor="fileInput" className="text-blue-600 hover:text-blue-400"> Choose File </label>
-                </span>
-                to Upload
-            </label>
-            <p className="text-xs font-medium  text-gray-500/70">Accepts all audio files (Max: 1 MB)</p>
-
-            {error && <p className="text-xs font-medium text-red-600">{error}</p>}
-            {selectedFile && <p className="text-xs font-medium">Uploaded {selectedFile}</p>}
+        <div className="w-full mt-3 p-1">
+            <div className={`text-center flex flex-col items-center justify-center flex-nowrap h-44 border-2 border-slate-200 p-2 hover:border-blue-300
+                                ${dragging ? 'bg-blue-50 border-blue-500 border-solid rounded-md disabled' : 'border-dashed rounded-sm'}`}
+                onDragEnter={handleDragEnter}
+                onDragLeave={handleDragLeave}
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={handleDrop}
+            >
+                <img src={require("../assets/uploadFile.png")} className="w-6 h-6 mb-2"></img>
+                <label className="text-sm font-medium text-gray-500">
+                    Drag and Drop or
+                    <span>
+                        <input
+                            type="file"
+                            className="hidden"
+                            id="fileInput"
+                            accept="audio/*"
+                            onChange={handleFileChange}
+                        />
+                        <label htmlFor="fileInput" className="text-blue-600 hover:text-blue-400"> Choose File </label>
+                    </span>
+                    to Upload
+                </label>
+                <p className="text-xs font-medium  text-gray-500/70">Accepts all audio files (Max: 1 MB)</p>
+                {error && <p className="text-xs font-medium text-red-600">{error}</p>}
+                {selectedFile && <p className="text-xs font-medium">Uploaded {selectedFile}</p>}
+            </div>
         </div>
     );
 }

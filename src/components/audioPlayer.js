@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import ImportButton from "./importButton";
 
-export default function AudioPlayer({ audioFile, audioSrc }) {
+export default function AudioPlayer({ audioFile, audioSrc, handleAudioFile }) {
     const [value, setValue] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
     const [maxValue, setMaxValue] = useState(100);
@@ -54,20 +54,20 @@ export default function AudioPlayer({ audioFile, audioSrc }) {
 
     return (
         <>
-            <div className="m-2 h-full w-96 p-2 rounded-md bg-slate-100/70">
+            <div className="mt-5 h-full w-full p-2 rounded-md bg-slate-100/70">
                 <audio src={audioSrc} ref={audioRef} />
                 <div className="flex">
                     <img className="w-14 h-14" src={require("../assets/audio-file-icon.png")} alt="Music Player Icon"></img>
                     <div className="flex flex-col w-full">
                         <div className="flex w-full justify-between">
                             <div className="flex flex-col">
-                                <h3 className="text-sm font-medium">{audioFile.name ? audioFile.name : 'Sample.mp4'}</h3>
+                                <h3 className="text-sm font-medium w-28 truncate">{audioFile.name ? audioFile.name : 'Sample.mp4'}</h3>
                                 <p className="text-xs font-medium">
                                     {audioFile.size ? Math.round(audioFile.size / 1024) : '0'}KB
                                 </p>
                             </div>
                             <div className="flex flex-col">
-                                <button className="self-end">
+                                <button className="self-end" onClick={handleAudioFile}>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 fill-gray-400 hover:fill-red-500">
                                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clipRule="evenodd" />
                                     </svg>
@@ -93,7 +93,7 @@ export default function AudioPlayer({ audioFile, audioSrc }) {
                     </div>
                 </div>
             </div>
-            <ImportButton />
+            {/* <ImportButton /> */}
         </>
     );
 }
