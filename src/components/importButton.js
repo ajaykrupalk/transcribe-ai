@@ -1,15 +1,22 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-export default function ImportButton() {
+export default function ImportButton({ clearProcessing, handleClearProcessing}) {
     const [isProcessing, setIsProcessing] = useState(false);
+
+    useEffect(()=>{
+        if(clearProcessing){
+            setIsProcessing(false);
+            handleClearProcessing(false);
+        }
+    })
 
     const handleProcessing = () => {
         setIsProcessing((isProcessing) => !isProcessing);
     }
 
     return (
-        <div className="flex w-full justify-end">
-            <button className="text-xs tracking-wide bg-blue-700 p-1.5 rounded-md text-white font-bold" onClick={handleProcessing}>
+        <div className="mt-2 flex w-full justify-end">
+            <button className="text-xs tracking-wide bg-blue-700 p-1.5 rounded-md text-white font-bold disabled:opacity-70 disabled:cursor-wait" onClick={handleProcessing} disabled={isProcessing}>
                 {!isProcessing ? (
                     <p>IMPORT</p>
                 ) : (

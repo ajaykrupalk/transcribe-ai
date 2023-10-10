@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 
-function Upload({ onInputValue, clearAudio }) {
+function Upload({ onInputValue, clearAudio, handleAudioFile }) {
     const [selectedFile, setSelectedFile] = useState('')
     const [dragging, setDragging] = useState(false)
     const [error, setError] = useState('')
 
     useEffect(() => {
-        if(clearAudio){
+        if (clearAudio) {
             setSelectedFile('')
         }
-    },[clearAudio])
+    }, [clearAudio])
 
     const handleDragEnter = (e) => {
         e.preventDefault();
@@ -73,7 +73,11 @@ function Upload({ onInputValue, clearAudio }) {
                             className="hidden"
                             id="fileInput"
                             accept="audio/*"
-                            onChange={handleFileChange}
+                            onChange={(e) => {
+                                handleAudioFile();
+                                handleFileChange(e);
+                                e.target.value = '';
+                            }}
                         />
                         <label htmlFor="fileInput" className="text-blue-600 hover:text-blue-400"> Choose File </label>
                     </span>
