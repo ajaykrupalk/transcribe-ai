@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export default function ImportButton({ clearProcessing, handleClearProcessing}) {
+export default function ImportButton({ clearProcessing, handleClearProcessing, handleResponse }) {
     const [isProcessing, setIsProcessing] = useState(false);
 
     useEffect(()=>{
@@ -8,10 +8,11 @@ export default function ImportButton({ clearProcessing, handleClearProcessing}) 
             setIsProcessing(false);
             handleClearProcessing(false);
         }
-    })
+    },[clearProcessing, handleClearProcessing])
 
     const handleProcessing = () => {
         setIsProcessing((isProcessing) => !isProcessing);
+        handleResponse(!isProcessing)
     }
 
     return (

@@ -64,7 +64,7 @@ function Upload({ onInputValue, clearAudio, handleAudioFile }) {
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={handleDrop}
             >
-                <img src={require("../assets/uploadFile.png")} className="w-6 h-6 mb-2"></img>
+                <img src={require("../assets/uploadFile.png")} alt="upload-icon" className="w-6 h-6 mb-2"></img>
                 <label className="text-sm font-medium text-gray-500">
                     Drag and Drop or
                     <span>
