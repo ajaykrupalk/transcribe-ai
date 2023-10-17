@@ -17,7 +17,6 @@ export default function WhisperAI({ audioFile, handleClearProcessing }) {
                 );
 
                 if (response.ok) {
-                    console.log(response)
                     const result = await response.json();
                     setTextData(result.text);
                     setResponseOk(true);
