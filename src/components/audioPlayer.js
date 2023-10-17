@@ -10,7 +10,6 @@ export default function AudioPlayer({ audioFile, audioSrc, handleAudioFile }) {
         const audio = audioRef.current
 
         audio.addEventListener("loadedmetadata", () => {
-            console.log(audio.duration)
             setMaxValue(Math.round(audio.duration))
         })
 
@@ -41,9 +40,7 @@ export default function AudioPlayer({ audioFile, audioSrc, handleAudioFile }) {
 
     const handleRange = (event) => {
         setValue(event.target.value);
-        console.log(event.target.value)
         const newTime = (event.target.value / maxValue) * audioRef.current.duration;
-        console.log('new time: ' + newTime)
         audioRef.current.currentTime = newTime;
     };
 
