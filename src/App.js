@@ -33,7 +33,6 @@ function App() {
 
   const handleResponse = (value) => {
     setSendAudio(value)
-    console.log('handleResponse', value)
   }
 
   return (

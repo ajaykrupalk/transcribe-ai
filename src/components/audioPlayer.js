@@ -26,11 +26,6 @@ export default function AudioPlayer({ audioFile, audioSrc, handleAudioFile }) {
     }, [isPlaying])
 
     useEffect(() => {
-        const audio = audioRef.current
-        console.log(audio.currentTime)
-    }, [audioRef])
-
-    useEffect(() => {
         if (isPlaying) {
             audioRef.current.play()
         } else {
