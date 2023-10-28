@@ -17,12 +17,16 @@ export default function WhisperAI({ audioFile, handleClearProcessing }) {
                         body: audioFile,
                     }
                 );
-
+                
                 if (response.ok) {
                     const result = await response.json();
                     setTextData(result.text);
                     setResponseOk(true);
                     handleClearProcessing(true);
+                } else if (response.status === 503 || response.status === 500) {
+                    setResponseOk(false);
+                    handleClearProcessing(true);
+                    setErrors('Our servers are busy. Please try again!');
                 } else {
                     setResponseOk(false);
                     handleClearProcessing(true);
